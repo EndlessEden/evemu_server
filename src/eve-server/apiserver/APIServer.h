@@ -3,8 +3,8 @@
     LICENSE:
     ------------------------------------------------------------------------------------
     This file is part of EVEmu: EVE Online Server Emulator
-    Copyright 2006 - 2016 The EVEmu Team
-    For the latest information visit http://evemu.org
+    Copyright 2006 - 2021 The EVEmu Team
+    For the latest information visit https://github.com/evemuproject/evemu_server
     ------------------------------------------------------------------------------------
     This program is free software; you can redistribute it and/or modify it under
     the terms of the GNU Lesser General Public License as published by the Free Software
@@ -61,7 +61,7 @@ private:
     void RunInternal();
 
     std::unique_ptr<boost::asio::detail::thread> _ioThread;
-    std::unique_ptr<boost::asio::io_service> _io;
+    std::unique_ptr<boost::asio::io_context> _io;
     std::unique_ptr<APIServerListener> _listener;
     std::string _url;
     std::string _basePath;

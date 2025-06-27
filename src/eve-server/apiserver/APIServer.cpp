@@ -3,8 +3,8 @@
     LICENSE:
     ------------------------------------------------------------------------------------
     This file is part of EVEmu: EVE Online Server Emulator
-    Copyright 2006 - 2016 The EVEmu Team
-    For the latest information visit http://evemu.org
+    Copyright 2006 - 2021 The EVEmu Team
+    For the latest information visit https://github.com/evemuproject/evemu_server
     ------------------------------------------------------------------------------------
     This program is free software; you can redistribute it and/or modify it under
     the terms of the GNU Lesser General Public License as published by the Free Software
@@ -104,7 +104,7 @@ std::string& APIServer::url()
 
 void APIServer::Run()
 {
-    _ioThread = std::unique_ptr<boost::asio::detail::thread>(new boost::asio::detail::thread(std::tr1::bind(&APIServer::RunInternal, this)));
+    _ioThread = std::unique_ptr<boost::asio::detail::thread>(new boost::asio::detail::thread(std::bind(&APIServer::RunInternal, this)));
 }
 
 void APIServer::Stop()
@@ -115,7 +115,7 @@ void APIServer::Stop()
 
 void APIServer::RunInternal()
 {
-    _io = std::unique_ptr<boost::asio::io_service>(new boost::asio::io_service());
+    _io = std::unique_ptr<boost::asio::io_context>(new boost::asio::io_context());
     _listener = std::unique_ptr<APIServerListener>(new APIServerListener(*_io));
     _io->run();
 }
